@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:videozen/constants.dart';
 import 'package:videozen/views/screens/auth/login_screen.dart';
+import 'package:videozen/views/screens/auth/signup_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +18,6 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgroundColor,
         ),
         title: 'Videozen',
-        home: LoginScreen());
+        home: SignupScreen());
   }
 }

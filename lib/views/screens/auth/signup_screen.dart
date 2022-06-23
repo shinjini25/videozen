@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:videozen/views/screens/auth/signup_screen.dart';
+import 'package:videozen/views/screens/auth/login_screen.dart';
 
 import '../../../constants.dart';
 import '../../widgets/text_input.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  SignupScreen({Key? key}) : super(key: key);
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,28 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
+            Stack(
+              children: [
+                const CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(
+                      'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png'),
+                  backgroundColor: Colors.grey,
+                ),
+                Positioned(
+                  bottom: 30,
+                  left: 28,
+                  child: IconButton(
+                    icon:
+                        const Icon(Icons.upload, color: Colors.black, size: 34),
+                    onPressed: () {},
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               margin: kIsWeb
@@ -43,12 +66,12 @@ class LoginScreen extends StatelessWidget {
                   : const EdgeInsets.symmetric(horizontal: 25),
               child: TextInputField(
                 controller: _emailController,
-                labelText: "Enter email",
+                labelText: "Enter Email",
                 icon: Icons.email,
               ),
             ),
             const SizedBox(
-              height: 25,
+              height: 15,
             ),
             Container(
               width: MediaQuery.of(context).size.width,
@@ -56,28 +79,43 @@ class LoginScreen extends StatelessWidget {
                   ? const EdgeInsets.symmetric(horizontal: 350)
                   : const EdgeInsets.symmetric(horizontal: 25),
               child: TextInputField(
-                controller: _emailController,
+                controller: _usernameController,
+                labelText: "Enter Username",
+                icon: Icons.person,
+                isObscure: true,
+              ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: kIsWeb
+                  ? const EdgeInsets.symmetric(horizontal: 350)
+                  : const EdgeInsets.symmetric(horizontal: 25),
+              child: TextInputField(
+                controller: _passwordController,
                 labelText: "Enter Password",
                 icon: Icons.lock,
                 isObscure: true,
               ),
             ),
             const SizedBox(
-              height: 25,
+              height: 15,
             ),
             Container(
               width: MediaQuery.of(context).size.width,
               margin: kIsWeb
                   ? const EdgeInsets.symmetric(horizontal: 350)
                   : const EdgeInsets.symmetric(horizontal: 25),
-              height: 55,
+              height: 50,
               alignment: Alignment.center,
               decoration: BoxDecoration(
                   color: buttonColor,
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: InkWell(
                 onTap: () {},
-                child: const Text("Log In",
+                child: const Text("Sign up",
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w800,
@@ -85,18 +123,18 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 18),
-            //sign up row
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don\'t have an account? ",
+                const Text("Already have an account? ",
                     style: TextStyle(fontSize: 16)),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SignupScreen()));
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
                   },
-                  child: Text("Register Now!",
+                  child: Text("Login",
                       style: TextStyle(fontSize: 18, color: secondaryColor)),
                 ),
               ],
