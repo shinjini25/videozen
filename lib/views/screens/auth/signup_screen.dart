@@ -1,9 +1,6 @@
-import 'dart:typed_data';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:videozen/views/screens/auth/login_screen.dart';
-
 import '../../../constants.dart';
 import '../../widgets/text_input.dart';
 
@@ -15,9 +12,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  // Uint8List? _image;
-  // String? _text = null;
-
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -26,8 +20,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Uint8List? _image;
-
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
@@ -35,22 +27,17 @@ class _SignupScreenState extends State<SignupScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Videozen",
+              "Application",
               style: TextStyle(
                   color: buttonColor,
                   fontSize: 30,
                   fontWeight: FontWeight.w900),
             ),
-            // const Text(
-            //   "Login",
-            //   style: TextStyle(
-            //       // color: buttonColor,
-            //       fontSize: 25,
-            //       fontWeight: FontWeight.w700),
-            // ),
             const SizedBox(
               height: 25,
             ),
+
+            //<------------------- Avatar and uplaod img icon ------------------->
             Stack(
               children: [
                 const CircleAvatar(
@@ -63,18 +50,18 @@ class _SignupScreenState extends State<SignupScreen> {
                   bottom: 30,
                   left: 28,
                   child: IconButton(
-                      icon: const Icon(Icons.upload,
-                          color: Colors.black, size: 34),
-                      onPressed: () async {
-                        // authController.pickImage();
-                        authController.pickImage();
-                      }),
+                    icon:
+                        const Icon(Icons.upload, color: Colors.black, size: 34),
+                    onPressed: () => authController.pickImage(),
+                  ),
                 )
               ],
             ),
             const SizedBox(
               height: 15,
             ),
+
+            //<------------------- text fields ------------------->
             Container(
               width: MediaQuery.of(context).size.width,
               margin: kIsWeb
@@ -119,6 +106,8 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(
               height: 15,
             ),
+
+            //<------------------- sign up button ------------------->
             Container(
               width: MediaQuery.of(context).size.width,
               margin: kIsWeb
@@ -137,7 +126,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       _passwordController.text,
                       authController.profilePhoto);
 
-                  //redirect to login
+                  //redirect to login if sign up is successful
                   if (res == "success") {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -152,6 +141,7 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             const SizedBox(height: 18),
 
+            //<------------------- login text row ------------------->
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

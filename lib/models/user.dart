@@ -13,14 +13,14 @@ class User {
     required this.profilePhoto,
   });
 
-//object field created in firestore database
+//helper function to set a document in firestore
   Map<String, dynamic> toJson() => {
         "name": name,
         "profilePhoto": profilePhoto,
         "email": email,
         "uid": uid,
       };
-
+//returns an user obj from a document sanpshot in firestore database
   static User fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
     return User(

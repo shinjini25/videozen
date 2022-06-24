@@ -1,22 +1,46 @@
+//< -- functions: setting inital screen(_setInitialScreen()), observing auth state changes(onReady()),
+//                pick image for uplaod(pickImage()), image storage(_uploadToStorage), sign up(registerUser), login(loginUser()) and logout user(signOut()) -->
+
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/user.dart' as modelUser;
 import '../constants.dart';
+import '../views/screens/auth/home_screen.dart';
+import '../views/screens/auth/login_screen.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
 
+//reactive variable --> observable
   late Rx<User?> _user;
   late Rx<File?> _pickedImage;
 
   File? get profilePhoto => _pickedImage.value;
 
-  //utility functions
+//persist user state
+  @override
+  void onReady() {
+    super.onReady();
+    _user = Rx<User?>(firebaseAuth.currentUser);
+    _user.bindStream(firebaseAuth.authStateChanges());
+    ever(_user, _setInitialScreen);
+  }
 
+//if user is not logged in, go to Login screen
+  _setInitialScreen(User? user) {
+    if (user == null) {
+      Get.offAll(() => LoginScreen());
+      // } else {
+      //   Get.offAll(() => const HomeScreen());
+    }
+  }
+
+//utility functions
+
+//pick an Img with the help of Image picker lib
   void pickImage() async {
     try {
       final pickedImage =
@@ -46,7 +70,7 @@ class AuthController extends GetxController {
   }
 
 //<---------------------------------------------------------------------------------------------------------->
-  //register the user function
+  //register user function
   Future<String> registerUser(
       String username, String email, String password, File? image) async {
     String res = "Some error occured";
@@ -112,7 +136,7 @@ class AuthController extends GetxController {
           'Login Successful',
           'You\'ve successfully logged in!',
         );
-        print("USER LOGIN SUCCESSFUL");
+        // print("USER LOGIN SUCCESSFUL");
       } else {
         Get.snackbar(
           'Error Logging in',

@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Videozen",
+              "Application",
               style: TextStyle(
                   color: buttonColor,
                   fontSize: 30,
@@ -28,7 +28,6 @@ class LoginScreen extends StatelessWidget {
             Text(
               "Login",
               style: TextStyle(
-                  // color: buttonColor,
                   fontSize: 23,
                   color: secondaryColor,
                   fontWeight: FontWeight.w700),
@@ -36,6 +35,8 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
+
+            //<------------------- text fields ------------------->
             Container(
               width: MediaQuery.of(context).size.width,
               margin: kIsWeb
@@ -65,6 +66,8 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
+
+            //<------------------- Login button ------------------->
             Container(
               width: MediaQuery.of(context).size.width,
               margin: kIsWeb
@@ -86,7 +89,8 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 18),
-            //sign up row
+
+            //<------------------- sign up text row ------------------->
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
