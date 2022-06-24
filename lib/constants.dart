@@ -2,13 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:videozen/views/screens/auth/add_video.dart';
 import 'package:videozen/views/screens/auth/home_screen.dart';
 import 'controllers/auth_controllers.dart';
 
 const pages = [
   Text("home"),
   Text("Search"),
-  Text("Add page screen"),
+  AddVideoScreen(),
   Text("Messages"),
   Text("Profile"),
 ];
