@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:videozen/views/screens/auth/signup_screen.dart';
-
 import '../../../constants.dart';
 import '../../widgets/text_input.dart';
 
@@ -26,13 +25,14 @@ class LoginScreen extends StatelessWidget {
                   fontSize: 30,
                   fontWeight: FontWeight.w900),
             ),
-            // const Text(
-            //   "Login",
-            //   style: TextStyle(
-            //       // color: buttonColor,
-            //       fontSize: 25,
-            //       fontWeight: FontWeight.w700),
-            // ),
+            Text(
+              "Login",
+              style: TextStyle(
+                  // color: buttonColor,
+                  fontSize: 23,
+                  color: secondaryColor,
+                  fontWeight: FontWeight.w700),
+            ),
             const SizedBox(
               height: 25,
             ),
@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                   ? const EdgeInsets.symmetric(horizontal: 350)
                   : const EdgeInsets.symmetric(horizontal: 25),
               child: TextInputField(
-                controller: _emailController,
+                controller: _passwordController,
                 labelText: "Enter Password",
                 icon: Icons.lock,
                 isObscure: true,
@@ -76,7 +76,8 @@ class LoginScreen extends StatelessWidget {
                   color: buttonColor,
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: InkWell(
-                onTap: () {},
+                onTap: () => authController.loginUser(
+                    _emailController.text, _passwordController.text),
                 child: const Text("Log In",
                     style: TextStyle(
                         color: Colors.black,

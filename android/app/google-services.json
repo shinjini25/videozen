@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "892900556595",
+    "project_id": "videozen-70565",
+    "storage_bucket": "videozen-70565.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892900556595:android:c7f180ad27c38e81bf4846",
+        "android_client_info": {
+          "package_name": "com.example.videozen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892900556595-b2hjus4dhga2gvuvs93s7p3v8ou64qjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaNMWpSJJlWKSdlft0-cM8eypij5-HYVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892900556595-b2hjus4dhga2gvuvs93s7p3v8ou64qjp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
