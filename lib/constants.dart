@@ -7,7 +7,7 @@ import 'package:videozen/views/screens/home_screen.dart';
 import 'package:videozen/views/screens/video_screen.dart';
 import 'controllers/auth_controllers.dart';
 
-const pages = [
+List pages = [
   VideoScreen(),
   Text("Search"),
   AddVideoScreen(),

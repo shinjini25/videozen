@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../controllers/video_controller.dart';
 import '../widgets/circle_animation.dart';
+import '../widgets/video_player_card.dart';
 
 class VideoScreen extends StatelessWidget {
-  const VideoScreen({super.key});
+  VideoScreen({super.key});
+
+  final VideoController videoController = Get.put(VideoController());
 
   buildProfile(String profilePhoto) {
     return SizedBox(
@@ -68,14 +73,18 @@ class VideoScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-        body: PageView.builder(
-            // itemCount: ,
+      body: Obx(() {
+        return PageView.builder(
+            itemCount: videoController.videoList.length,
             controller: PageController(initialPage: 0, viewportFraction: 1),
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
+              final data = videoController.videoList[index];
               return Stack(
                 children: [
-                  // VideoPlayerCard(videoUrl: ,),
+                  VideoPlayerCard(
+                    videoUrl: data.videoUrl,
+                  ),
                   Column(
                       //sized box
                       children: [
@@ -94,36 +103,36 @@ class VideoScreen extends StatelessWidget {
                                   // mainAxisAlignment:
                                   //     MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    const Text(
-                                      'username',
+                                    Text(
+                                      data.username,
                                       style: TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const Text(
-                                      'caption',
-                                      style: TextStyle(
+                                    Text(
+                                      data.caption,
+                                      style: const TextStyle(
                                         fontSize: 16,
                                         color: Colors.white,
                                       ),
                                     ),
                                     Row(
-                                      children: const [
-                                        Icon(
+                                      children: [
+                                        const Icon(
                                           Icons.music_note,
                                           size: 15,
                                           color: Colors.white,
                                         ),
                                         Text(
-                                          'song name',
-                                          style: TextStyle(
+                                          data.songName,
+                                          style: const TextStyle(
                                               fontSize: 15,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 8,
                                         )
                                       ],
@@ -143,8 +152,7 @@ class VideoScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     //profile photo
-                                    buildProfile(
-                                        'https://images.unsplash.com/photo-1615125946484-86dd0a2cdb18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=954&q=80'),
+                                    buildProfile(data.profilePhoto),
                                     //likes
                                     Column(children: [
                                       InkWell(
@@ -157,7 +165,7 @@ class VideoScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 7),
                                       Text(
-                                        '200',
+                                        data.likes.length.toString(),
                                         style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
@@ -178,7 +186,7 @@ class VideoScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 7),
                                       Text(
-                                        '20',
+                                        data.commentCount.toString(),
                                         style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
@@ -190,7 +198,7 @@ class VideoScreen extends StatelessWidget {
                                     Column(children: [
                                       InkWell(
                                         onTap: () {},
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.reply,
                                           size: 30,
                                           color: Colors.white,
@@ -198,7 +206,7 @@ class VideoScreen extends StatelessWidget {
                                       ),
                                       const SizedBox(height: 7),
                                       Text(
-                                        '200',
+                                        data.shareCount.toString(),
                                         style: const TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
@@ -207,8 +215,7 @@ class VideoScreen extends StatelessWidget {
                                     ]),
 
                                     CircleAnimation(
-                                      child: buildMusicAlbum(
-                                          'https://images.unsplash.com/photo-1615125946484-86dd0a2cdb18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=954&q=80'),
+                                      child: buildMusicAlbum(data.profilePhoto),
                                     ),
                                   ],
                                 )),
@@ -217,6 +224,9 @@ class VideoScreen extends StatelessWidget {
                       ]),
                 ],
               );
-            }));
+            });
+      }),
+    );
+    // );
   }
 }
