@@ -1,8 +1,8 @@
-import 'dart:io';
+//<------- functionality: Add video button to select a video. On successful selection of video, user is redirected to confirm screen. -->
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../constants.dart';
 import './confirm_screen.dart';
 
@@ -11,6 +11,8 @@ class AddVideoScreen extends StatelessWidget {
 
   pickVideo(ImageSource src, BuildContext context) async {
     final video = await ImagePicker().pickVideo(source: src);
+
+    //if video is not null, redirect to confirm screen
     if (video != null) {
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -23,6 +25,7 @@ class AddVideoScreen extends StatelessWidget {
     }
   }
 
+//dialog options
   showOptionsDialog(BuildContext context) {
     return showDialog(
       context: context,
@@ -90,6 +93,7 @@ class AddVideoScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: secondaryColor,
               ),
+              //add video button
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [

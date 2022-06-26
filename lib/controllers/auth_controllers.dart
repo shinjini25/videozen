@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/user.dart' as modelUser;
 import '../constants.dart';
-import '../views/screens/auth/home_screen.dart';
+import '../views/screens/home_screen.dart';
 import '../views/screens/auth/login_screen.dart';
 
 class AuthController extends GetxController {

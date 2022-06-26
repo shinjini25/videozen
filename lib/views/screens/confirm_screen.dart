@@ -1,18 +1,12 @@
+//<--- functionality: preview the video, add song name and caption and upload button-->
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-// class ConfirmScreen extends StatelessWidget {
-//   const ConfirmScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: Text("Confirmed!"),
-//     );
-//   }
-// }
-// import 'package:videozen/controllers/upload_video_controller.dart';
+import 'package:videozen/controllers/upload_video_controller.dart';
+import 'package:videozen/views/screens/add_video.dart';
+import 'package:videozen/views/screens/home_screen.dart';
 import 'package:videozen/views/widgets/text_input.dart';
 import 'package:video_player/video_player.dart';
 
@@ -34,8 +28,8 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
   TextEditingController _songController = TextEditingController();
   TextEditingController _captionController = TextEditingController();
 
-  // UploadVideoController uploadVideoController =
-  //     Get.put(UploadVideoController());
+  UploadVideoController uploadVideoController =
+      Get.put(UploadVideoController());
 
   @override
   void initState() {
@@ -107,11 +101,28 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {},
-                      // uploadVideoController.uploadVideo(
-                      // _songController.text,
-                      // _captionController.text,
-                      // widget.videoPath),
+                      onPressed: () async {
+                        String res = await uploadVideoController.uploadVideo(
+                            _songController.text,
+                            _captionController.text,
+                            widget.videoPath);
+
+                        print("DONEEEEEEEEEEEEEEEE");
+                        if (res != "success") {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => AddVideoScreen()));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => HomeScreen()));
+                        }
+                      },
+
+                      // print("DONEEEEEEEEEEEEEEEE");
+                      // if (res != "success") {
+                      //   Navigator.of(context).push(MaterialPageRoute(
+                      //       builder: (context) => AddVideoScreen()));
+                      // }
+                      // },
                       child: const Text(
                         'Share!',
                         style: TextStyle(
