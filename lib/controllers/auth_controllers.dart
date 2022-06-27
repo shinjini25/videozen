@@ -20,6 +20,8 @@ class AuthController extends GetxController {
 
   File? get profilePhoto => _pickedImage.value;
 
+  User? get userData => _user.value!;
+
 //persist user state
   @override
   void onReady() {

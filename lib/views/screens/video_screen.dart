@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constants.dart';
 import '../../controllers/video_controller.dart';
 import '../widgets/circle_animation.dart';
 import '../widgets/video_player_card.dart';
@@ -45,7 +46,7 @@ class VideoScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              padding: EdgeInsets.all(11),
+              padding: const EdgeInsets.all(11),
               height: 50,
               width: 50,
               decoration: BoxDecoration(
@@ -80,6 +81,7 @@ class VideoScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
               final data = videoController.videoList[index];
+
               return Stack(
                 children: [
                   VideoPlayerCard(
@@ -96,7 +98,7 @@ class VideoScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.only(left: 15),
+                                padding: const EdgeInsets.only(left: 15),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,7 +107,7 @@ class VideoScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       data.username,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -156,11 +158,15 @@ class VideoScreen extends StatelessWidget {
                                     //likes
                                     Column(children: [
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () =>
+                                            videoController.likeVideo(data.id),
                                         child: Icon(
                                           Icons.favorite,
                                           size: 30,
-                                          color: Colors.white,
+                                          color: data.likes.contains(
+                                                  authController.userData!.uid)
+                                              ? Colors.red
+                                              : Colors.white,
                                         ),
                                       ),
                                       const SizedBox(height: 7),
@@ -178,7 +184,7 @@ class VideoScreen extends StatelessWidget {
                                     Column(children: [
                                       InkWell(
                                         onTap: () {},
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.comment,
                                           size: 30,
                                           color: Colors.white,

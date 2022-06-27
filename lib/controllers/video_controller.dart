@@ -22,4 +22,23 @@ class VideoController extends GetxController {
       return returnedVideos;
     }));
   }
+
+  void likeVideo(String id) async {
+    DocumentSnapshot snap = await firestore.collection('videos').doc(id).get();
+
+    //get currentUser id
+    String uid = authController.userData!.uid;
+
+    //if current user has already likes the post
+    if ((snap.data()! as dynamic)['likes'].contains(uid)) {
+      await firestore.collection('videos').doc(id).update({
+        'likes': FieldValue.arrayRemove([uid])
+      });
+      //add current user id to likes
+    } else {
+      await firestore.collection('videos').doc(id).update({
+        'likes': FieldValue.arrayUnion([uid])
+      });
+    }
+  }
 }
