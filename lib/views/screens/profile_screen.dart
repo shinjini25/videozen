@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:videozen/constants.dart';
+import 'package:videozen/views/screens/auth/login_screen.dart';
+import 'package:videozen/views/screens/edit_profile_screen.dart';
+import 'package:videozen/views/screens/home_screen.dart';
 import '../../controllers/profile_controller.dart';
 import '../../controllers/video_controller.dart';
 
@@ -32,6 +35,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     void onSignout() async {
       authController.signOut();
+      print("User signed out!");
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+    }
+
+    void onEditProfile() async {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
     }
 
     return GetBuilder<ProfileController>(
@@ -45,15 +56,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.black12,
-              leading: const Icon(
-                Icons.person_add_alt_1_outlined,
-              ),
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                  icon: const Icon(Icons.arrow_back_ios)),
               actions: [
-                InkWell(
-                  onTap: () => onSignout,
-                  child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: Icon(Icons.logout_outlined, color: Colors.red)),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: InkWell(
+                    onTap: () => onSignout(),
+                    child: Icon(Icons.logout_outlined, color: Colors.red),
+                  ),
                 ),
               ],
               title: Text(
@@ -176,6 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () {
                                 if (widget.uid == authController.userData.uid) {
                                   //edit profile function
+                                  onEditProfile();
                                 } else {
                                   controller.followUser();
                                 }

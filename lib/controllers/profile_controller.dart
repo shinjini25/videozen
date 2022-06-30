@@ -29,6 +29,7 @@ class ProfileController extends GetxController {
     final userData = userDoc.data()! as dynamic;
     String name = userData['name'];
     String profilePhoto = userData['profilePhoto'];
+    String email = userData['email'];
     int likes = 0;
     int followers = 0;
     int following = 0;
@@ -71,6 +72,7 @@ class ProfileController extends GetxController {
       'likes': likes.toString(),
       'profilePhoto': profilePhoto,
       'name': name,
+      'email': email,
       'thumbnails': thumbnails,
     };
     update();
