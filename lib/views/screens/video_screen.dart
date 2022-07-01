@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:videozen/views/screens/comment_screen.dart';
-
+import 'package:flutter_share/flutter_share.dart';
 import '../../constants.dart';
 import '../../controllers/video_controller.dart';
 import '../widgets/circle_animation.dart';
@@ -11,6 +11,13 @@ class VideoScreen extends StatelessWidget {
   VideoScreen({super.key});
 
   final VideoController videoController = Get.put(VideoController());
+  Future<void> shareVideo() async {
+    await FlutterShare.share(
+      title: 'Explore fun videos at Videozen. Sign up today!',
+      text: 'I am inviting you to check out some amazing vidoes on Videozen',
+      linkUrl: 'https://flutter.dev/',
+    );
+  }
 
   buildProfile(String profilePhoto) {
     return SizedBox(
@@ -106,14 +113,20 @@ class VideoScreen extends StatelessWidget {
                                   // mainAxisAlignment:
                                   //     MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text(
-                                      data.username,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.person),
+                                        Text(
+                                          " ${data.username}",
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    const SizedBox(height: 8),
                                     Text(
                                       data.caption,
                                       style: const TextStyle(
@@ -121,25 +134,7 @@ class VideoScreen extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                     ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.music_note,
-                                          size: 15,
-                                          color: Colors.white,
-                                        ),
-                                        Text(
-                                          data.songName,
-                                          style: const TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 8,
-                                        )
-                                      ],
-                                    ),
+                                    const SizedBox(height: 8),
                                   ],
                                 ),
                               ),
@@ -210,7 +205,7 @@ class VideoScreen extends StatelessWidget {
                                     //share counte
                                     Column(children: [
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () => shareVideo(),
                                         child: const Icon(
                                           Icons.reply,
                                           size: 30,

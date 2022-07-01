@@ -65,12 +65,14 @@ class UploadVideoController extends GetxController {
     try {
       String uid = firebaseAuth.currentUser!.uid;
 
-      print("UID ${uid}");
+      print(
+          "----------------------------------UID----------------------------------------------- ${uid}");
 
       DocumentSnapshot userSnap =
           await firestore.collection('users').doc(uid).get();
 
-      print("user snap ${userSnap.data()}");
+      print(
+          "------------------------------------user snap ----------------------------------------- ${userSnap.data()}");
 
       //create the unique identifier for the video as video0, video1, video2 etc.
       var totalDocs = await firestore.collection('videos').get();
@@ -79,7 +81,8 @@ class UploadVideoController extends GetxController {
       //url that will be stored in firestore
       String videoUrl = await _uploadVideoToStorage("video $len", videoPath);
 
-      print("videoUrl ${videoUrl}");
+      print(
+          "-----------------------------videoUrl--------------------- ${videoUrl}");
 
       //thumbnail url stored in firestore
       String thumbnailUrl =
@@ -87,17 +90,17 @@ class UploadVideoController extends GetxController {
 
       //make a video instance from video model
       Video video = Video(
-          username: (userSnap.data()! as Map<String, dynamic>)['name'],
+          username: (userSnap.data() as Map<String, dynamic>)['name'],
           uid: uid,
           id: "video $len",
           likes: [],
           commentCount: 0,
           shareCount: 0,
-          songName: songName,
+          // songName: songName,
           caption: caption,
           videoUrl: videoUrl,
           profilePhoto:
-              (userSnap.data()! as Map<String, dynamic>)['profilePhoto'],
+              (userSnap.data() as Map<String, dynamic>)['profilePhoto'],
           thumbnail: thumbnailUrl);
 
       //store video in firestore

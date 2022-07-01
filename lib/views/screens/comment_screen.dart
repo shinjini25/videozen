@@ -58,7 +58,7 @@ class CommentScreen extends StatelessWidget {
                                         fontSize: 14,
                                         color: Colors.grey,
                                         fontWeight: FontWeight.w400)),
-                                SizedBox(width: 15),
+                                const SizedBox(width: 15),
                                 Text("${comment.likes.length} likes",
                                     style: const TextStyle(
                                         fontSize: 14,

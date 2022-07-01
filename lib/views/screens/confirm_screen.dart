@@ -62,11 +62,11 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
             //video preview
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 1.5,
+              height: MediaQuery.of(context).size.height / 1.4,
               child: VideoPlayer(controller),
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -74,21 +74,22 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   //song name input
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    width: MediaQuery.of(context).size.width - 20,
-                    child: TextInputField(
-                      controller: _songController,
-                      labelText: 'Song Name',
-                      icon: Icons.music_note,
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.symmetric(horizontal: 10),
+                  //   width: MediaQuery.of(context).size.width - 20,
+                  //   child: TextInputField(
+                  //     controller: _songController,
+                  //     labelText: 'Song Name',
+                  //     icon: Icons.music_note,
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 10,
                   ),
 
                   //caption controller
                   Container(
+                    height: 50,
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     width: MediaQuery.of(context).size.width - 20,
                     child: TextInputField(
@@ -107,7 +108,6 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                             _captionController.text,
                             widget.videoPath);
 
-                        print("DONEEEEEEEEEEEEEEEE");
                         if (res != "success") {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => AddVideoScreen()));

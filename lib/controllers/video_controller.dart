@@ -6,9 +6,13 @@ import '../models/video.dart';
 
 class VideoController extends GetxController {
   final Rx<List<Video>> _videoList = Rx<List<Video>>([]);
+  final Rx<List<Video>> _myVideos = Rx<List<Video>>([]);
 
 //getter fun
   List<Video> get videoList => _videoList.value;
+
+  List<Video> get myVideos => _myVideos.value;
+
   @override
   void onInit() {
     super.onInit();
@@ -19,6 +23,25 @@ class VideoController extends GetxController {
       for (var element in query.docs) {
         returnedVideos.add(Video.fromSnap(element));
       }
+      return returnedVideos;
+    }));
+  }
+
+  void getMyVideos(String uid) async {
+    //profile videos
+    _myVideos.bindStream(firestore
+        .collection('videos')
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map((QuerySnapshot query) {
+      //map individual stream data for each video
+      List<Video> returnedVideos = [];
+      if (query.docs.isNotEmpty) {
+        for (var element in query.docs) {
+          returnedVideos.add(Video.fromSnap(element));
+        }
+      }
+      //otherwise returns empty list
       return returnedVideos;
     }));
   }

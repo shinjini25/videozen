@@ -6,6 +6,7 @@ import 'package:videozen/constants.dart';
 import 'package:videozen/views/screens/auth/login_screen.dart';
 import 'package:videozen/views/screens/edit_profile_screen.dart';
 import 'package:videozen/views/screens/home_screen.dart';
+import 'package:videozen/views/screens/play_video.dart';
 import '../../controllers/profile_controller.dart';
 import '../../controllers/video_controller.dart';
 
@@ -22,11 +23,13 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final ProfileController profileController = Get.put(ProfileController());
+  final VideoController videoController = Get.put(VideoController());
 
   @override
   void initState() {
     super.initState();
     profileController.updateUserId(widget.uid);
+    videoController.getMyVideos(widget.uid);
   }
 
   @override
@@ -43,6 +46,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     void onEditProfile() async {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
+    }
+
+    void playVideo(int index) async {
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => PlayVideoScreen(index: index)));
     }
 
     return GetBuilder<ProfileController>(
@@ -219,30 +227,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                           ),
-
                           const SizedBox(
-                            height: 25,
+                            height: 15,
                           ),
-                          // video list
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.user['thumbnails'].length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1,
-                              crossAxisSpacing: 5,
-                            ),
-                            itemBuilder: (context, index) {
-                              String thumbnail =
-                                  controller.user['thumbnails'][index];
-                              return CachedNetworkImage(
-                                imageUrl: thumbnail,
-                                fit: BoxFit.cover,
-                              );
-                            },
-                          )
+                          const Divider(thickness: 3),
+                          controller.user['thumbnails'].length == 0
+                              ? Column(children: const [
+                                  SizedBox(height: 190),
+                                  Text("No videos to show",
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 18,
+                                      ))
+                                ])
+                              :
+                              // video list
+                              GridView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount:
+                                      controller.user['thumbnails'].length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 1,
+                                    crossAxisSpacing: 5,
+                                  ),
+                                  itemBuilder: (context, index) {
+                                    String thumbnail =
+                                        controller.user['thumbnails'][index];
+                                    // String videoUrl =
+                                    //     controller.user['videoUrls'][index];
+                                    return InkWell(
+                                      onTap: () => playVideo(index),
+                                      child: CachedNetworkImage(
+                                        imageUrl: thumbnail,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    );
+                                  },
+                                )
                         ],
                       ),
                     ),
