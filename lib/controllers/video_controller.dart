@@ -64,4 +64,23 @@ class VideoController extends GetxController {
       });
     }
   }
+
+  void updateShareCount(String id) async {
+    DocumentSnapshot snap = await firestore.collection('videos').doc(id).get();
+    int shares = (snap.data()! as dynamic)['shareCount'];
+    shares = shares++;
+    await firestore.collection('videos').doc(id).update({'shareCount': shares});
+  }
+
+  // Delete Post
+  Future<String> deletePost(String id) async {
+    String res = "Some error occurred";
+    try {
+      await firestore.collection('videos').doc(id).delete();
+      res = 'success';
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
 }

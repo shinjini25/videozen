@@ -11,12 +11,14 @@ class VideoScreen extends StatelessWidget {
   VideoScreen({super.key});
 
   final VideoController videoController = Get.put(VideoController());
-  Future<void> shareVideo() async {
+  Future<void> shareVideo(String id) async {
     await FlutterShare.share(
       title: 'Explore fun videos at Videozen. Sign up today!',
       text: 'I am inviting you to check out some amazing vidoes on Videozen',
       linkUrl: 'https://flutter.dev/',
     );
+
+    videoController.updateShareCount(id);
   }
 
   buildProfile(String profilePhoto) {
@@ -205,7 +207,7 @@ class VideoScreen extends StatelessWidget {
                                     //share counte
                                     Column(children: [
                                       InkWell(
-                                        onTap: () => shareVideo(),
+                                        onTap: () => shareVideo(data.id),
                                         child: const Icon(
                                           Icons.reply,
                                           size: 30,
