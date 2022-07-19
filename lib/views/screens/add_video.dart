@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../constants.dart';
 import './confirm_screen.dart';
@@ -84,16 +85,27 @@ class AddVideoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: InkWell(
-          onTap: () => showOptionsDialog(context),
-          child: Container(
+        body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // SvgPicture.asset(
+          //   'assets/video.svg',
+          //   height: 240.0,
+          //   width: 270.0,
+          // ),
+          SizedBox(height: 10),
+          // Center(
+          InkWell(
+            onTap: () => showOptionsDialog(context),
+            child: Container(
               width: 190,
               height: 55,
               decoration: BoxDecoration(
                 color: secondaryColor,
               ),
               //add video button
+
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
@@ -108,9 +120,39 @@ class AddVideoScreen extends StatelessWidget {
                           color: Colors.black,
                           fontWeight: FontWeight.bold),
                     ),
-                  ])),
-        ),
+                  ]),
+            ),
+          ),
+
+          SizedBox(height: 80),
+          //box
+          Container(
+              height: 200,
+              width: 350,
+              decoration: BoxDecoration(
+                color: Colors.grey[700],
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/video.svg',
+                    height: 160.0,
+                    width: 270.0,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Container(
+                      width: 170,
+                      child: Text(
+                          "Share your favorite videos of fond memories along with a caption with the rest of the world!",
+                          style: TextStyle(fontSize: 17)))
+                ],
+              ))
+          // ),
+        ],
       ),
-    );
+    ));
   }
 }

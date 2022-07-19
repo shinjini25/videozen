@@ -45,18 +45,18 @@ class UploadVideoController extends GetxController {
     return downloadUrl;
   }
 
-  void printShit() async {
-    String uid = await firebaseAuth.currentUser!.uid;
+  // void printShit() async {
+  //   String uid = await firebaseAuth.currentUser!.uid;
 
-    print("UID ${uid}");
+  //   print("UID ${uid}");
 
-    DocumentSnapshot userSnap =
-        await firestore.collection('users').doc(uid).get();
+  //   DocumentSnapshot userSnap =
+  //       await firestore.collection('users').doc(uid).get();
 
-    print("user snap ${userSnap}");
+  //   print("user snap ${userSnap}");
 
-    print("username ${(userSnap.data()! as Map<String, dynamic>)['name']}");
-  }
+  //   print("username ${(userSnap.data()! as Map<String, dynamic>)['name']}");
+  // }
 
   //upload the video
   Future<String> uploadVideo(

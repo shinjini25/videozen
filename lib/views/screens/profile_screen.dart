@@ -6,7 +6,9 @@ import 'package:videozen/constants.dart';
 import 'package:videozen/views/screens/auth/login_screen.dart';
 import 'package:videozen/views/screens/edit_profile_screen.dart';
 import 'package:videozen/views/screens/home_screen.dart';
+import 'package:videozen/views/screens/message_screen.dart';
 import 'package:videozen/views/screens/play_video.dart';
+import '../../controllers/msg_controller.dart';
 import '../../controllers/profile_controller.dart';
 import '../../controllers/video_controller.dart';
 
@@ -25,12 +27,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final ProfileController profileController = Get.put(ProfileController());
   final VideoController videoController = Get.put(VideoController());
 
+  final MessageController msgController = Get.put(MessageController());
+
   @override
   void initState() {
     super.initState();
     profileController.updateUserId(widget.uid);
     videoController.getMyVideos(widget.uid);
   }
+  //msg is clicked{
+  // msg_controller.updateReceiverUid(widget.uid);
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +73,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               backgroundColor: Colors.black12,
               leading: IconButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
                   },
                   icon: const Icon(Icons.arrow_back_ios)),
               actions: [
@@ -75,7 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.all(10),
                   child: InkWell(
                     onTap: () => onSignout(),
-                    child: Icon(Icons.logout_outlined, color: Colors.red),
+                    child: const Icon(Icons.logout_outlined, color: Colors.red),
                   ),
                 ),
               ],
@@ -194,39 +201,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(
                             height: 15,
                           ),
-                          Center(
-                            child: InkWell(
-                              onTap: () {
-                                if (widget.uid == authController.userData.uid) {
-                                  //edit profile function
-                                  onEditProfile();
-                                } else {
-                                  controller.followUser();
-                                }
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: size.width / 3,
-                                height: 34,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(
-                                      color: secondaryColor,
-                                      width: 2,
-                                    )),
-                                child: Text(
-                                  widget.uid == authController.userData.uid
-                                      ? 'Edit Profile'
-                                      : controller.user['isFollowing']
-                                          ? 'Unfollow'
-                                          : 'Follow',
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (widget.uid ==
+                                          authController.userData.uid) {
+                                        //edit profile function
+                                        onEditProfile();
+                                      } else {
+                                        controller.followUser();
+                                      }
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: size.width / 3,
+                                      height: 34,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          border: Border.all(
+                                            color: secondaryColor,
+                                            width: 2,
+                                          )),
+                                      child: Text(
+                                        widget.uid ==
+                                                authController.userData.uid
+                                            ? 'Edit Profile'
+                                            : controller.user['isFollowing']
+                                                ? 'Unfollow'
+                                                : 'Follow',
+                                        style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
+                                SizedBox(width: 12),
+                                //msg user btn
+                                widget.uid == authController.userData.uid
+                                    ? Container()
+                                    : Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          border: Border.all(
+                                            color: secondaryColor,
+                                            width: 2,
+                                          ),
+                                          color: Colors.black12,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0, vertical: 2),
+                                          child: InkWell(
+                                              onTap: () async {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            MessageScreen(
+                                                                recieverUserId:
+                                                                    widget.uid,
+                                                                name: controller
+                                                                        .user[
+                                                                    'name'])));
+                                              },
+                                              child: const Icon(Icons.mail)),
+                                        ))
+                              ]),
                           const SizedBox(
                             height: 15,
                           ),

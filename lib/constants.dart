@@ -4,16 +4,18 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:videozen/views/screens/add_video.dart';
 import 'package:videozen/views/screens/home_screen.dart';
+import 'package:videozen/views/screens/message_screen.dart';
 import 'package:videozen/views/screens/profile_screen.dart';
 import 'package:videozen/views/screens/video_screen.dart';
 import 'controllers/auth_controllers.dart';
+import 'views/screens/gotomessage.dart';
 import 'views/screens/search_screen.dart';
 
 List pages = [
   VideoScreen(),
   SearchScreen(),
   AddVideoScreen(),
-  Text("Messages"),
+  GoToMsgScreen(),
   ProfileScreen(uid: authController.userData.uid),
 ];
 // COLORS

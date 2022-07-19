@@ -66,10 +66,10 @@ class VideoController extends GetxController {
   }
 
   void updateShareCount(String id) async {
-    DocumentSnapshot snap = await firestore.collection('videos').doc(id).get();
-    int shares = (snap.data()! as dynamic)['shareCount'];
-    shares = shares++;
-    await firestore.collection('videos').doc(id).update({'shareCount': shares});
+    DocumentSnapshot doc = await firestore.collection('videos').doc(id).get();
+    await firestore.collection('videos').doc(id).update({
+      'shareCount': (doc.data()! as dynamic)['shareCount'] + 1,
+    });
   }
 
   // Delete Post

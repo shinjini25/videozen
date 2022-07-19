@@ -45,6 +45,9 @@ dependencies:
   timeago: ^3.2.2
   cached_network_image: ^3.2.1
   flutter_share: ^2.0.0
+  flutter_svg: ^1.1.1+1
+  uuid: ^3.0.6
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -69,8 +72,12 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/search.svg
+    - assets/video.svg
+    - assets/share.svg
+    - assets/world.svg
+    - assets/friends.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

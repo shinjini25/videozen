@@ -4,9 +4,9 @@ import '../constants.dart';
 import '../models/user.dart';
 
 class SearchController extends GetxController {
-  final Rx<List<User>> _searchedUsers = Rx<List<User>>([]);
+  final Rx<List<UserModel>> _searchedUsers = Rx<List<UserModel>>([]);
 
-  List<User> get searchedUsers => _searchedUsers.value;
+  List<UserModel> get searchedUsers => _searchedUsers.value;
 
   searchUser(String typedUser) async {
     _searchedUsers.bindStream(firestore
@@ -14,9 +14,9 @@ class SearchController extends GetxController {
         .where('name', isGreaterThanOrEqualTo: typedUser)
         .snapshots()
         .map((QuerySnapshot query) {
-      List<User> users = [];
+      List<UserModel> users = [];
       for (var element in query.docs) {
-        users.add(User.fromSnap(element));
+        users.add(UserModel.fromSnap(element));
       }
       return users;
     }));

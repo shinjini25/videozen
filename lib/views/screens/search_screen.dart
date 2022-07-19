@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:videozen/views/screens/profile_screen.dart';
 import '../../models/user.dart';
 import 'home_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);
@@ -70,23 +71,32 @@ class SearchScreen extends StatelessWidget {
           ),
         ),
         body: searchController.searchedUsers.isEmpty
-            ? const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 26),
-                child: Center(
-                  child: Text(
-                    'Search for millions of users on Videozen!',
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                    SvgPicture.asset(
+                      'assets/search.svg',
+                      height: 210.0,
+                      width: 210.0,
                     ),
-                  ),
-                ),
-              )
+                    SizedBox(height: 10),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 39),
+                      child: Text(
+                        'Search for users on Videozen!',
+                        style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ])
             : ListView.builder(
                 itemCount: searchController.searchedUsers.length,
                 itemBuilder: (context, index) {
-                  User user = searchController.searchedUsers[index];
+                  UserModel user = searchController.searchedUsers[index];
                   return InkWell(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(

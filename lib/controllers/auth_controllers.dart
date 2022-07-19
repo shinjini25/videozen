@@ -131,7 +131,7 @@ class AuthController extends GetxController {
         String downloadUrl = await uploadToStorage(image);
 
         //pass the details to the custom user model created
-        modelUser.User user = modelUser.User(
+        modelUser.UserModel user = modelUser.UserModel(
             name: username,
             email: email,
             uid: cred.user!.uid,
