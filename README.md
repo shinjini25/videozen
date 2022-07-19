@@ -22,6 +22,15 @@
 ![signup](https://user-images.githubusercontent.com/71487701/175515977-555284fb-e69f-4313-9667-2a18c31893ff.png)  ![login](https://user-images.githubusercontent.com/71487701/175515994-993d2dab-119a-4fcf-acf6-40bb6288be46.png)
 ![3](https://user-images.githubusercontent.com/71487701/175516066-22736e27-1fd9-4620-ae21-0956e8314511.png)
 
+![chat](https://user-images.githubusercontent.com/71487701/179748950-cf5bd247-72a6-40eb-9565-d8d2e84fef22.png)
+![add_video](https://user-images.githubusercontent.com/71487701/179748964-5446ac4d-0e47-4e11-8c5a-1ea09ecc31c3.png)
+![profile](https://user-images.githubusercontent.com/71487701/179748967-499b0732-fb47-47e4-9b6d-7f073fa69a45.png)
+![upd_prof](https://user-images.githubusercontent.com/71487701/179748969-d157e333-6a4e-4022-aac3-4e779a436ff3.png)
+![vid](https://user-images.githubusercontent.com/71487701/179748975-e6c15227-07d1-4d8e-bf0e-517e36c7c780.png)
+![search_prof](https://user-images.githubusercontent.com/71487701/179748978-baa7cb8a-f748-47a4-8763-0e231416b2a7.png)
+![onvo](https://user-images.githubusercontent.com/71487701/179748982-5b3396b8-4ae3-4c33-ba57-7fbfca39c1a2.png)
+
+
 ### Note: 
 Image Picker plugin requires additional configurational steps for ioS devices. For more information, refer [here](https://pub.dev/packages/image_picker).
 
